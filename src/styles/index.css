@@ -1,12 +1,51 @@
+ol, ul {
+	list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
-/* 
+/* TODO LIST */
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+.listDiv {
+    display: flex;
+}
 
-*/
+.listItem {
+    background-color: rgb(255, 239, 242);
+    margin-right: auto;
+}
+
+/* DELETE BUTTON */
+input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+} 
+
+label {
+    border: 2px solid #ff7979;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 5px 10px;
+}
+
+label:hover {
+    background-color: #ff7979;
+}
+
+input[type="radio"]:focus + label {
+    border: 2px solid black;
+}
+
+input[type="radio"]:checked + label {
+    background-color: rgb(214, 36, 36);
+    border: 2px solid rgb(214, 36, 36);
+}
+
+.listDiv .deleteButton {
+    display: none;
+}
+
+.listDiv:hover .deleteButton, .listDiv:focus .deleteButton{
+    display: inline-block;
+}
