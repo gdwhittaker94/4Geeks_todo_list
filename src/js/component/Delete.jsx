@@ -11,7 +11,7 @@ const Delete = ({ onDelete }) => {
         <div className='deleteButton'>
             <input type="radio" id="delete" name="deleteButton" value="Delete"/>
             <label for="delete" onClick={onDelete}>                                    
-                <FontAwesomeIcon icon={faTrash} style={{color: "#000000",}}/>
+                <FontAwesomeIcon icon={faTrash} style={{color: "#000000",}} className='fa-2xl'/>
             </label>
         </div>
     )

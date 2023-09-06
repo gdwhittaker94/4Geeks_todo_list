@@ -6,23 +6,24 @@ const TodoList = () => {
     const [todoList, setTodoList] = useState([]);       // <li> Array
     const [itemValue, setItemValue] = useState("");     // <li> Item Content
 
-    const listUpdate = () => {
-        setTodoList([...todoList, itemValue]);          // Updates array with new "itemValue"
+    const listUpdate = () => {                          // Function to update todo list
+        setTodoList([...todoList, itemValue]);          // Updates <li> array with new "itemValue"
         setItemValue("");                               // Resets input field 
     }
     
-    const deleteItem = (index) => {                     // Function takes index value of li item
-        const updatedTodoList = [...todoList];          // Creates variable with current todoList
+    const deleteItem = (index) => {                     // Function takes index value of li item (from below)
+        const updatedTodoList = [...todoList];          // Creates variable and stores the current todoList as its value
         updatedTodoList.splice(index, 1);               // Takes out the item with the passed index value
-        setTodoList(updatedTodoList);                   // Updates "todoList" with value of this function's variable 
+        setTodoList(updatedTodoList);                   // Passes this function's variable as the <li> array value 
     }
 
     return (
         <>
             <input 
                 type="text" 
-                value={itemValue}                                                 // Controlled input: value controlled by React's state 
-                onChange={(event) => setItemValue(event.target.value)}            // itemValue variable synced up with input field value 
+                placeholder='Add a task...'    
+                value={itemValue}                                                 // Value of input = value in "itemValue" variable = CONTROLLED INPUT = value controlled by React's state 
+                onChange={(event) => setItemValue(event.target.value)}            // "itemValue" variable synced up with this input field's value 
                 onKeyDown={(event) => {if(event.key === "Enter"){listUpdate()}}}  // Pressing Enter triggers function 
             />
             <ul>
@@ -34,11 +35,9 @@ const TodoList = () => {
                         </div>
                     </>)
                     )
-                }                                                              
+                }                                                               
             </ul>
-        </>
-        
-        // <ul>: .map() to perform a function on each array item: create a <li> with each value inside todoList array.        
+        </> // Here the content of the <ul> is dynamically generated, with the .map() method creating <li> elements from the "todoList" array          
     )
 }
 

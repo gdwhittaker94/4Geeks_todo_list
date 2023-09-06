@@ -1,18 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo+Play:wght@800&family=Shantell+Sans:ital@0;1&display=swap');
+
+/*------- NORMALISATION ----------*/
+*,
+body,
+*::before,
+*::after {
+padding: 0;
+margin: 0;
+border: 0;
+/*Remove the margin, padding and border of all elements (all browsers)*/
+font-size: 10px;
+/*10px = 1em -> pixel size/10 = #em (16px=1.6em)*/
+box-sizing: border-box;
+/*The full area/size of an element`s box is measured by its total height and width, not just the content section. The different box sections adjust to the defined box size */
+}
+
 ol, ul {
 	list-style: none;
-    padding: 0;
-    margin: 0;
+}
+
+/*---------- CUSTOM STYLES ----------*/
+
+:root {
+    --shantell: 'Shantell Sans', cursive;
+    --cairo: 'Cairo Play', sans-serif;
+}
+
+/* PAGE */
+body {
+    background-image: url(https://img.freepik.com/free-vector/black-ink-splatter-background_1409-2116.jpg?w=1800&t=st=1694008431~exp=1694009031~hmac=47af47b560cbc55e8cd904929ec0416c85ddaead2856e3797cbdebee7c443cb2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+/* HEADER */
+h1 {
+    font-family: var(--cairo);
+    font-size: 5rem;
+    text-shadow: 1px 2px 1px #f79c1d;
+    text-align: center;
 }
 
 /* TODO LIST */
 
+input {
+        filter: drop-shadow(0px 1px 1px black);
+        font-size: 1.8rem;
+        font-family: var(--shantell);
+        padding: 3px 8px;
+        width: max(200px, 80%);
+        border-radius: 8px;
+        margin-inline: auto;
+}
+
+input:focus {
+    outline: 2px solid orange;
+}
+
 .listDiv {
     display: flex;
+    align-items: center;
+    margin-block: 10px;
+    border-bottom: 2px solid orange;
 }
 
 .listItem {
-    background-color: rgb(255, 239, 242);
     margin-right: auto;
+    font-size: 1.8rem;
+    font-family: var(--shantell);
+    padding: 5px 0px;
+   
 }
 
 /* DELETE BUTTON */
@@ -23,14 +89,15 @@ input[type="radio"] {
 } 
 
 label {
-    border: 2px solid #ff7979;
+    border: 2px solid orange;
     border-radius: 5px;
     background-color: #fff;
-    padding: 5px 10px;
+    padding: 9px 13px;
+    margin-bottom: 10px;
 }
 
 label:hover {
-    background-color: #ff7979;
+    background-color: orange;
 }
 
 input[type="radio"]:focus + label {
@@ -38,8 +105,8 @@ input[type="radio"]:focus + label {
 }
 
 input[type="radio"]:checked + label {
-    background-color: rgb(214, 36, 36);
-    border: 2px solid rgb(214, 36, 36);
+    background-color: orange;
+    border: 2px solid orange;
 }
 
 .listDiv .deleteButton {
@@ -48,4 +115,14 @@ input[type="radio"]:checked + label {
 
 .listDiv:hover .deleteButton, .listDiv:focus .deleteButton{
     display: inline-block;
+}
+
+/* MESSAGE */
+
+.message {
+    font-family: var(--shantell);
+    font-size: 1.6rem;
+    margin-top: 10px;
+    text-align: center;
+    padding-inline: 10px;
 }
