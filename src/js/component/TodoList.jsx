@@ -42,3 +42,5 @@ const TodoList = () => {
 }
 
 export default TodoList 
+
+// if (todoInput.trim() !== "") {  const addTodo = () => {}
