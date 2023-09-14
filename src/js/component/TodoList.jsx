@@ -5,65 +5,68 @@ import Message from './Message';
 const TodoList = () => {
     
     // TODO LIST VARIABLES
-    const [todoList, setTodoList] = useState([]);       // <li> Array
-    const [itemValue, setItemValue] = useState("");     // <li> Item Content
+    const [todoList, setTodoList] = useState([]);         // <li> Array
+    const [itemValue, setItemValue] = useState("");       // <li> Item Content
     const url = "https://playground.4geeks.com/apis/fake/todos/user/elLordInglés" //My User URL
 
 
     // TODO LIST USEEFFECTS
-    useEffect(() => {
-        getDataFetch()
-    }, [])
 
-    useEffect(() => {
-        updateTodoList()
+    useEffect(() => {                                   
+        getData()                                         // On component mount, call 'getData' function
+    }, [])
+    
+
+    const getData = () => {                               // Fetching Data using Fetch API 
+        fetch(url)                                        // Fetch endpoint 
+        .then(response => {if(!response.ok){createUser()} // If ok property of object = false, call 'createUser' function   
+            return response.json()})                      // Else, if = true, create 2nd Promise that resolves with the result of converting the response body plaintext to JSON 
+        .then(data => setTodoList(data))                  // With this JSON data now available to use (an array full of objects), update todoList with it. 
+        .catch(error => console.log(error))               // In case Promise is rejected 
+    }  
+
+    const createUser = () => {                            // Function to create user in API if not already present
+        fetch(url, {                                      // Fetch endpoint + Fetch init object to adjust settings of fetch
+            method: "POST",                               // POST = Create
+            headers: {                                    // Headers = meta-data/additional info about our request 
+                "Content-Type": "application/json"        // Indicates the type of data being sent in the request body to the server.    
+            },
+            body: JSON.stringify([])                      // The request body (an empty JSON array) and this method converts the empty array into a JSON string (so the server can use it).
+        })
+        .then(response => response.json())                // If the request is successful, create 2nd Promise that resolves with the result of converting the response body plaintext to JSON
+        .then(data => setTodoList(data))                  // With this JSON data now available to use (an array full of objects), update todoList with it. 
+        .catch(error => console.log(error))               // In case Promise is rejected
+    }
+
+
+    useEffect(() => {                                     // Whenever the todoList changes, call 'updateTodoList' function
+        updateTodoList()                            
     }, [todoList])
 
 
-    // TODO LIST FUNCTIONS
-    const getDataFetch = () => {                        // Data Fetch - fetch Version
-        fetch(url)
-        .then(response => {if(!response.ok){createUser()} 
-            return response.json()})                    // If Promise is fulfilled, turn received plain-text into JSON so JS can read it 
-        .then(data => setTodoList(data))                // Update todo list with data received from API
-        .catch(error => console.log(error))             // In case Promise is rejected 
-    }
-
-    const createUser = () => {                          // Function to create user in API if not already present
-        fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify([])
-        })
-        .then(response => response.json())           
-        .then(data => setTodoList(data))                
-        .catch(error => console.log(error))
-    }
-
-    const updateTodoList = () => {
+    const updateTodoList = () => {                        // This function sends a request to update the endpoint
         fetch(url, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(todoList)
+            body: JSON.stringify(todoList)                // Updates endpoint with current todoList (converted into plaintext)
         })
     }
 
-    const listUpdate = () => {                          // Function to update todo list
-        if(itemValue.trim() !== ""){                    // As long as "itemValue" doesn't = empty, do the following: 
-            const newItem = {label: itemValue};
-            setTodoList([...todoList, newItem]);        // Takes current array and adds current "itemValue" to it
-            setItemValue("");                           // Resets input field
+
+    const listUpdate = () => {                            // Function to update todoList
+        if(itemValue.trim() !== ""){                      // As long as "itemValue" doesn't = empty, do the following: 
+            const newItem = {label: itemValue};           // Create a variable whose value = an object with a property called 'label' whose value is whatever the user has put in the input box 
+            setTodoList([...todoList, newItem]);          // Takes current array and adds the object from 'newItem' to it
+            setItemValue("");                             // Resets input field
         }                             
-    }
+    }                                                     // NB: The variable value is an object because the API deals in objects
     
-    const deleteItem = (index) => {                     // Function takes index value of li item (from below)
-        const updatedTodoList = [...todoList];          // Creates variable and stores the current todoList as its value
-        updatedTodoList.splice(index, 1);               // Takes out the item with the passed index value
-        setTodoList(updatedTodoList);                   // Passes this function's variable as the <li> array value 
+    const deleteItem = (index) => {                       // Function takes index value of li item (from below)
+        const updatedTodoList = [...todoList];            // Creates variable and stores the current todoList as its value
+        updatedTodoList.splice(index, 1);                 // Takes out the item with the passed index value
+        setTodoList(updatedTodoList);                     // Passes this function's variable as the <li> array value 
     }
 
 
