@@ -81,6 +81,10 @@ input:focus {
    
 }
 
+.invisible {
+    display: none;
+}
+
 /* DELETE BUTTON */
 input[type="radio"] {
     opacity: 0;
