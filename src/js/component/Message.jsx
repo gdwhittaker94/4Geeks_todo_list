@@ -5,7 +5,7 @@ const Message = () => {
         <p className='message'>
             No tasks. 
             <br></br>
-            Write something and press "Enter" to start.
+            Write something above press "Enter" to add a Todo.
         </p>
     )
 }
