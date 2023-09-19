@@ -42,6 +42,14 @@ body {
     align-content: center;
 }
 
+p {
+    font-size: 1.6rem;
+    font-family: var(--shantell);
+    width: max(200px, 80%);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 /* HEADER */
 h1 {
     font-family: var(--cairo);
@@ -57,9 +65,10 @@ input {
         font-size: 1.8rem;
         font-family: var(--shantell);
         padding: 3px 8px;
-        width: max(200px, 80%);
+        width: max(250px, 60%);
         border-radius: 8px;
         margin-inline: auto;
+        margin-bottom: 20px;
 }
 
 input:focus {
@@ -121,7 +130,7 @@ input[type="radio"]:checked + label {
     display: inline-block;
 }
 
-/* MESSAGE */
+/* TODO LIST PAGE */
 
 .message {
     font-family: var(--shantell);
@@ -129,4 +138,17 @@ input[type="radio"]:checked + label {
     margin-top: 10px;
     text-align: center;
     padding-inline: 10px;
+    width: 100%; 
+}
+
+button {
+    background-color: orange;
+    color: black;
+    padding: 2px 10px;
+    border-radius: 5px;
+    width: fit-content;
+    margin-inline: auto;
+    font-size: 1.6rem;
+    font-family: 'Cairo Play';
+    margin-top: 20px;
 }

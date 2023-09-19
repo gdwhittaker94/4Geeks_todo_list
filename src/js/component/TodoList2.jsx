@@ -4,6 +4,10 @@ import Message from './Message';
 
 const TodoList = () => {
     
+     /* NOTES
+    - User's todo list is not the same when we leave their list and go back to it/doesn't sync
+    */ 
+
     /* TODO LIST VARIABLES */
     const [userList, setUserList] = useState([]);         // List of all current users
     const [newUserValue, setNewUserValue] = useState(""); // Create New User 
@@ -11,13 +15,8 @@ const TodoList = () => {
     const [todoList, setTodoList] = useState([]);         // TodoList Array
     const [todoValue, setTodoValue] = useState("");       // TodoList Item Content 
     const [toggleUsers, setToggleUsers] = useState(true); // Toggle state 
+    const allUserUrl = "https://playground.4geeks.com/apis/fake/todos/user/"; //My User URL
     
-    const allUserUrl = "https://playground.4geeks.com/apis/fake/todos/user/" //My User URL
-    
-    /* TODO
-    - user todolist is updated and remains the same when we leave and go back to it 
-    - put name of selected user into a variable so I can access it later when i need to update their todolist (listUpdate func)
-    */ 
 
     /* UI WITH ALL USERS */
     useEffect(() => {                                   
@@ -95,7 +94,9 @@ const TodoList = () => {
         toggleUsers === true?             
             <>
                 <p>
-                    First time here? Create a new user to store your Todo list.
+                    First time here? 
+                    <br />
+                    Create a new user to store your Todo list.
                 </p>
                 <input // Input for creating new user 
                     type="text" 
@@ -110,8 +111,8 @@ const TodoList = () => {
                 <ul>
                     { // List of current users to choose from 
                         userList.map((value, index) => (
-                            <div className='listDiv'>
-                                <li key={index} className='listItem' onClick={() => getUserTodoList(value)}>{value}</li>
+                            <div className='listDiv' onClick={() => getUserTodoList(value)}>
+                                <li key={index} className='listItem'>{value}</li>
                             </div>
                         ))
                     }
